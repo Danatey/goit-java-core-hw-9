@@ -1,10 +1,10 @@
-public class MyQueue {
-    private Node firstMyQueueNode;
-    private Node lastMyQueueNode;
+public class MyQueue<T> {
+    private Node<T> firstMyQueueNode;
+    private Node<T> lastMyQueueNode;
     private int size;
 
-    public void add(Object value) {
-        Node newNode = new Node(value);
+    public void add(T value) {
+        Node<T> newNode = new Node<>(value);
 
         if (size == 0) {
             firstMyQueueNode = newNode;

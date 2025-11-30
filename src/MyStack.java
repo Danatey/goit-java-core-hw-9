@@ -1,9 +1,9 @@
-public class MyStack {
-    private Node topMyStackNode;
+public class MyStack<T> {
+    private Node<T> topMyStackNode;
     private int size;
 
-    public void push(Object value) {
-        Node newNode = new Node(value);
+    public void push(T  value) {
+        Node<T> newNode = new Node<>(value);
 
         newNode.prevNode = topMyStackNode;
         topMyStackNode = newNode;
@@ -32,12 +32,12 @@ public class MyStack {
             return;
         }
 
-        Node current = topMyStackNode;
+        Node<T> current = topMyStackNode;
         for (int i = 0; i < index - 1; i++) {
             current = current.prevNode;
         }
 
-        Node removedNode = current.prevNode;
+        Node<T> removedNode = current.prevNode;
         current.prevNode = removedNode.prevNode;
 
         removedNode.prevNode = null;
@@ -48,7 +48,7 @@ public class MyStack {
 
     public void clear() {
         while (topMyStackNode != null) {
-            Node temp = topMyStackNode.prevNode;
+            Node<T> temp = topMyStackNode.prevNode;
             topMyStackNode.prevNode = null;
             topMyStackNode.value = null;
             topMyStackNode = temp;

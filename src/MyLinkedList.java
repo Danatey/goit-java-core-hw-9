@@ -1,18 +1,18 @@
 public class MyLinkedList {
-    private Node firstLinkedListNode;
-    private Node lastLinkedListNode;
+    private Node headLinkedListNode;
+    private Node tailLinkedListNode;
     private int size;
 
     public void add(Object value) {
         Node newNode = new Node(value);
 
         if (size == 0) {
-            firstLinkedListNode = newNode;
-            lastLinkedListNode = newNode;
+            headLinkedListNode = newNode;
+            tailLinkedListNode = newNode;
         } else {
-            newNode.prevNode = lastLinkedListNode;
-            lastLinkedListNode.nextNode = newNode;
-            lastLinkedListNode = newNode;
+            newNode.prevNode = tailLinkedListNode;
+            tailLinkedListNode.nextNode = newNode;
+            tailLinkedListNode = newNode;
         }
         size++;
     }
@@ -38,13 +38,13 @@ public class MyLinkedList {
         if (prev != null) {
             prev.nextNode = next;
         } else {
-            firstLinkedListNode = next;
+            headLinkedListNode = next;
         }
 
         if (next != null) {
             next.prevNode = prev;
         } else {
-            lastLinkedListNode = prev;
+            tailLinkedListNode = prev;
         }
 
         node.prevNode = null;
@@ -55,7 +55,7 @@ public class MyLinkedList {
     }
 
     public void clear() {
-        Node current = firstLinkedListNode;
+        Node current = headLinkedListNode;
         while (current != null) {
             Node next = current.nextNode;
             current.prevNode = null;
@@ -63,8 +63,8 @@ public class MyLinkedList {
             current.value = null;
             current = next;
         }
-        firstLinkedListNode = null;
-        lastLinkedListNode = null;
+        headLinkedListNode = null;
+        tailLinkedListNode = null;
         size = 0;
     }
 
@@ -73,13 +73,13 @@ public class MyLinkedList {
     }
 
     private Node getNode(int index) {
-        Node current = firstLinkedListNode;
+        Node current = headLinkedListNode;
         if (index < size / 2) {
             for (int i = 0; i < index; i++) {
                 current = current.nextNode;
             }
         } else {
-            current = lastLinkedListNode;
+            current = tailLinkedListNode;
 
             for (int i = size - 1; i > index; i--) {
                 current = current.prevNode;

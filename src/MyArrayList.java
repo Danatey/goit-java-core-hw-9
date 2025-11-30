@@ -1,22 +1,19 @@
-public class MyArrayList<K, V> {
-    private Entry<K, V>[] buckets;
+public class MyArrayList<T> {
+    private T[] buckets;
     private int size;
 
-    public MyArrayList(Entry<K, V> buckets) {
-        this.buckets = new Entry[10];
+    public MyArrayList() {
+        this.buckets = (T[]) new Object[10];
         this.size = 0;
     }
 
-    public void add(Object value) {
+    public void add(T value) {
         if (size == buckets.length) {
-            Entry[] newBuckets = new Entry[size * 2];
-            for (int i = 0; i < size; i++) {
-                newBuckets[i] = buckets[i];
-            }
-            buckets = newBuckets;
+            T[] newArray = (T[]) new Object[size * 2];
+            System.arraycopy(buckets, 0, newArray, 0, size);
+            buckets = newArray;
         }
-        this.buckets[size] = (Entry<K, V>) value;
-        this.size++;
+        buckets[size++] = value;
     }
 
     public void remove(int index) {
@@ -43,7 +40,7 @@ public class MyArrayList<K, V> {
         return size;
     }
 
-    public Entry get(int index) {
+    public T get(int index) {
         if (index < 0 || index >= size) {
             return null;
         }
